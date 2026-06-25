@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Wisdom — Islamic & Motivational Quotes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #7C3AED;
+      --purple-dark: #5B21B6;
+      --purple-light: #EDE9FE;
+      --purple-mid: #DDD6FE;
+      --purple-text: #4C1D95;
+      --teal: #0D9488;
+      --teal-light: #CCFBF1;
+      --teal-text: #134E4A;
+      --bg: #ffffff;
+      --bg2: #F5F3FF;
+      --surface: #ffffff;
+      --text: #1E1B4B;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg2);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem 3rem;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(124,58,237,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(124,58,237,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(167,139,250,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .logo-icon {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      font-family: 'Amiri', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--purple);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      font-weight: 300;
+    }
+
+    /* Filter buttons */
+    .filters {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 7px 20px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--purple); color: var(--purple); }
+    .filter-btn.active-all { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .filter-btn.active-islamic { background: var(--teal); color: #fff; border-color: var(--teal); }
+    .filter-btn.active-motivational { background: var(--purple-dark); color: #fff; border-color: var(--purple-dark); }
+
+    /* Quote Card */
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--purple-mid);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem 2rem;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(124,58,237,0.08);
+      transition: opacity 0.3s ease;
+    }
+    .card::before {
+      content: '\201C';
+      font-family: 'Amiri', serif;
+      font-size: 8rem;
+      color: rgba(124,58,237,0.07);
+      position: absolute;
+      top: -1.5rem;
+      left: 1.5rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 1.2rem;
+    }
+    .badge-islamic { background: var(--teal-light); color: var(--teal-text); border: 1px solid rgba(13,148,136,0.25); }
+    .badge-motivational { background: var(--purple-light); color: var(--purple-text); border: 1px solid rgba(124,58,237,0.25); }
+
+    .arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.5rem;
+      line-height: 2.2;
+      text-align: right;
+      direction: rtl;
+      color: var(--purple-dark);
+      margin-bottom: 1.2rem;
+      border-right: 3px solid var(--purple);
+      padding-right: 1rem;
+    }
+
+    .quote-text {
+      font-family: 'Amiri', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .source {
+      font-size: 0.82rem;
+      color: var(--purple);
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    /* Card footer */
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .copy-btn:hover { border-color: var(--purple); color: var(--purple); }
+    .copy-btn svg { width: 14px; height: 14px; }
+    .copied-msg {
+      font-size: 0.78rem;
+      color: var(--teal);
+      opacity: 0;
+      transition: opacity 0.3s;
+      margin-left: 8px;
+    }
+    .quote-counter {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* New Quote button */
+    .new-btn {
+      width: 100%;
+      margin-top: 1.2rem;
+      padding: 0.9rem;
+      background: var(--purple);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 14px rgba(124,58,237,0.25);
+    }
+    .new-btn:hover { background: var(--purple-dark); transform: translateY(-1px); }
+    .new-btn:active { transform: scale(0.98); }
+    .new-btn svg { width: 18px; height: 18px; }
+
+    /* Share section */
+    .share-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 0.75rem;
+      justify-content: center;
+    }
+    .share-btn {
+      flex: 1;
+      padding: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-muted);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .share-btn:hover { background: var(--purple-light); color: var(--purple); border-color: var(--purple-mid); }
+    .share-btn svg { width: 15px; height: 15px; }
+
+    /* Quote count display */
+    .stats {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .wrapper { position: relative; z-index: 1; width: 100%; max-width: 680px; }
+
+    /* Fade animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeIn 0.35s ease forwards; }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 1.7rem; }
+      .card { padding: 1.8rem 1.4rem 1.4rem; }
+      .arabic { font-size: 1.2rem; }
+      .quote-text { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <span class="logo-icon">☽</span>
+    <h1>Daily Wisdom</h1>
+    <p>Islamic & Motivational Quotes — Har roz ek nai inspiration</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active-all" onclick="setFilter('all', this)">✦ All</button>
+    <button class="filter-btn" onclick="setFilter('islamic', this)">☽ Islamic</button>
+    <button class="filter-btn" onclick="setFilter('motivational', this)">★ Motivational</button>
+  </div>
+
+  <div class="card" id="card">
+    <div>
+      <span class="badge" id="badge"></span>
+      <div class="arabic" id="arabic"></div>
+      <p class="quote-text" id="quoteText"></p>
+      <p class="source" id="source"></p>
+    </div>
+    <div class="card-footer">
+      <div style="display:flex;align-items:center;">
+        <button class="copy-btn" onclick="copyQuote()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+        <span class="copied-msg" id="copiedMsg">✓ Copied!</span>
+      </div>
+      <span class="quote-counter" id="counter"></span>
+    </div>
+  </div>
+
+  <button class="new-btn" onclick="newQuote()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+    New Quote
+  </button>
+
+  <div class="share-row">
+    <button class="share-btn" onclick="shareWhatsApp()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.524 3.655 1.435 5.16L2 22l4.978-1.404A9.945 9.945 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 11.999 2zm0 18c-1.71 0-3.3-.463-4.67-1.27l-.334-.198-3.456.974.93-3.394-.217-.35A7.972 7.972 0 0 1 4 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/></svg>
+      WhatsApp
+    </button>
+    <button class="share-btn" onclick="shareFacebook()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </button>
+    <button class="share-btn" onclick="shareTwitter()">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Twitter / X
+    </button>
+  </div>
+
+  <p class="stats" id="stats"></p>
+</div>
+
+<script>
+const quotes = [
+  { type: 'islamic', arabic: 'إِنَّ مَعَ الْعُسْرِ يُسْرًا', text: 'Verily, with hardship comes ease.', source: 'Quran 94:6' },
+  { type: 'islamic', arabic: 'وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ', text: 'Whoever relies upon Allah — then He is sufficient for him.', source: 'Quran 65:3' },
+  { type: 'islamic', arabic: 'فَاذْكُرُونِي أَذْكُرْكُمْ', text: 'Remember Me, and I will remember you.', source: 'Quran 2:152' },
+  { type: 'islamic', arabic: 'وَاللَّهُ يُحِبُّ الصَّابِرِينَ', text: 'And Allah loves those who are patient.', source: 'Quran 3:146' },
+  { type: 'islamic', arabic: 'إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ', text: 'Indeed, Allah does not allow the reward of the doers of good to be lost.', source: 'Quran 9:120' },
+  { type: 'islamic', arabic: 'وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ', text: 'And He is with you wherever you are.', source: 'Quran 57:4' },
+  { type: 'islamic', arabic: '', text: 'The strong person is not the one who can overpower others. The strong person is the one who controls himself when angry.', source: 'Prophet Muhammad ﷺ — Bukhari' },
+  { type: 'islamic', arabic: '', text: 'Be in this world as if you were a stranger or a traveller passing through.', source: 'Prophet Muhammad ﷺ — Bukhari' },
+  { type: 'islamic', arabic: '', text: 'Speak good or remain silent.', source: 'Prophet Muhammad ﷺ — Bukhari & Muslim' },
+  { type: 'islamic', arabic: '', text: 'Make things easy, do not make them difficult. Give glad tidings, and do not drive people away.', source: 'Prophet Muhammad ﷺ — Bukhari' },
+  { type: 'islamic', arabic: '', text: 'None of you truly believes until he loves for his brother what he loves for himself.', source: 'Prophet Muhammad ﷺ — Bukhari & Muslim' },
+  { type: 'islamic', arabic: 'وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ', text: 'Perhaps you dislike a thing and it is good for you.', source: 'Quran 2:216' },
+  { type: 'motivational', arabic: '', text: 'Start before you are ready. The best time to begin is now.', source: '' },
+  { type: 'motivational', arabic: '', text: 'You do not have to be great to start, but you have to start to be great.', source: 'Zig Ziglar' },
+  { type: 'motivational', arabic: '', text: 'Fall seven times, stand up eight.', source: 'Japanese Proverb' },
+  { type: 'motivational', arabic: '', text: 'Believe you can and you are halfway there.', source: 'Theodore Roosevelt' },
+  { type: 'motivational', arabic: '', text: 'It always seems impossible until it is done.', source: 'Nelson Mandela' },
+  { type: 'motivational', arabic: '', text: 'Small steps every day lead to great distances over time.', source: '' },
+  { type: 'motivational', arabic: '', text: 'Your only limit is your mind. Train it well.', source: '' },
+  { type: 'motivational', arabic: '', text: 'The secret of getting ahead is getting started.', source: 'Mark Twain' },
+  { type: 'motivational', arabic: '', text: 'Do not watch the clock. Do what it does — keep going.', source: 'Sam Levenson' },
+  { type: 'motivational', arabic: '', text: 'Hard work beats talent when talent does not work hard.', source: 'Tim Notke' },
+  { type: 'motivational', arabic: '', text: 'The only way to do great work is to love what you do.', source: 'Steve Jobs' },
+  { type: 'motivational', arabic: '', text: 'Success is not final, failure is not fatal. It is the courage to continue that counts.', source: 'Winston Churchill' },
+];
+
+let filter = 'all';
+let lastIndex = -1;
+let currentQuote = null;
+
+function getPool() {
+  return filter === 'all' ? quotes : quotes.filter(q => q.type === filter);
+}
+
+function setFilter(type, el) {
+  filter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.className = 'filter-btn';
+  });
+  el.classList.add('active-' + type);
+  lastIndex = -1;
+  newQuote();
+}
+
+function newQuote() {
+  const pool = getPool();
+  let idx;
+  do { idx = Math.floor(Math.random() * pool.length); } while (pool.length > 1 && idx === lastIndex);
+  lastIndex = idx;
+  currentQuote = pool[idx];
+
+  const arabicEl = document.getElementById('arabic');
+  if (currentQuote.arabic) {
+    arabicEl.textContent = currentQuote.arabic;
+    arabicEl.style.display = 'block';
+  } else {
+    arabicEl.style.display = 'none';
+  }
+
+  document.getElementById('quoteText').textContent = currentQuote.text;
+  document.getElementById('source').textContent = currentQuote.source ? '— ' + currentQuote.source : '';
+
+  const badge = document.getElementById('badge');
+  badge.textContent = currentQuote.type === 'islamic' ? '☽ Islamic' : '★ Motivational';
+  badge.className = 'badge badge-' + currentQuote.type;
+
+  document.getElementById('counter').textContent = (idx + 1) + ' of ' + pool.length;
+
+  updateStats();
+
+  const card = document.getElementById('card');
+  card.classList.remove('fade-in');
+  void card.offsetWidth;
+  card.classList.add('fade-in');
+}
+
+function updateStats() {
+  const total = quotes.length;
+  const islamic = quotes.filter(q => q.type === 'islamic').length;
+  const motiv = quotes.filter(q => q.type === 'motivational').length;
+  document.getElementById('stats').textContent = total + ' quotes total  •  ' + islamic + ' Islamic  •  ' + motiv + ' Motivational';
+}
+
+function copyQuote() {
+  if (!currentQuote) return;
+  let text = currentQuote.text;
+  if (currentQuote.source) text += '\n— ' + currentQuote.source;
+  navigator.clipboard.writeText(text).then(() => {
+    const msg = document.getElementById('copiedMsg');
+    msg.style.opacity = 1;
+    setTimeout(() => msg.style.opacity = 0, 2000);
+  });
+}
+
+function shareWhatsApp() {
+  if (!currentQuote) return;
+  const text = encodeURIComponent('"' + currentQuote.text + '"' + (currentQuote.source ? '\n— ' + currentQuote.source : '') + '\n\nDaily Wisdom App');
+  window.open('https://wa.me/?text=' + text, '_blank');
+}
+
+function shareFacebook() {
+  window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), '_blank');
+}
+
+function shareTwitter() {
+  if (!currentQuote) return;
+  const text = encodeURIComponent('"' + currentQuote.text + '"' + (currentQuote.source ? ' — ' + currentQuote.source : ''));
+  window.open('https://twitter.com/intent/tweet?text=' + text, '_blank');
+}
+
+newQuote();
+</script>
+</body>
+</html>
